@@ -1,0 +1,31 @@
+[ 2026-06-10 00:41:57,241 ] 20 root - INFO - Initiate the data ingestion
+[ 2026-06-10 00:41:57,395 ] 96 pymongo.serverSelection - INFO - {"message": "Waiting for suitable server to become available", "selector": "Primary()", "operation": "find", "topologyDescription": "<TopologyDescription id: 6a28657dcac276283626bfcb, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-zl6agmd-shard-00-00.ltiglrd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-zl6agmd-shard-00-01.ltiglrd.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-zl6agmd-shard-00-02.ltiglrd.mongodb.net', 27017) server_type: Unknown, rtt: None>]>", "clientId": {"$oid": "6a28657dcac276283626bfcb"}, "remainingTimeMS": 30}
+[ 2026-06-10 00:41:59,895 ] 65 root - INFO - Performed train test split on the dataframe
+[ 2026-06-10 00:41:59,895 ] 67 root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[ 2026-06-10 00:41:59,895 ] 75 root - INFO - Exporting train and test file path.
+[ 2026-06-10 00:41:59,958 ] 84 root - INFO - Exported train and test file path.
+[ 2026-06-10 00:41:59,958 ] 22 root - INFO - Data Initiation Completed
+[ 2026-06-10 00:41:59,966 ] 26 root - INFO - Initiate the data Validation
+[ 2026-06-10 00:42:00,078 ] 32 root - INFO - Required number of columns:2
+[ 2026-06-10 00:42:00,078 ] 33 root - INFO - Data frame has columns:31
+[ 2026-06-10 00:42:00,078 ] 32 root - INFO - Required number of columns:2
+[ 2026-06-10 00:42:00,078 ] 33 root - INFO - Data frame has columns:31
+[ 2026-06-10 00:42:00,264 ] 28 root - INFO - data Validation Completed
+[ 2026-06-10 00:42:00,264 ] 31 root - INFO - data Transformation started
+[ 2026-06-10 00:42:00,264 ] 63 root - INFO - Entered initiate_data_transformation method of DataTransformation class
+[ 2026-06-10 00:42:00,264 ] 65 root - INFO - Starting data transformation
+[ 2026-06-10 00:42:00,298 ] 48 root - INFO - Entered get_data_trnasformer_object method of Trnasformation class
+[ 2026-06-10 00:42:00,298 ] 53 root - INFO - Initialise KNNImputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[ 2026-06-10 00:42:00,315 ] 46 root - INFO - Entered the save_object method of MainUtils class
+[ 2026-06-10 00:42:00,315 ] 50 root - INFO - Exited the save_object method of MainUtils class
+[ 2026-06-10 00:42:00,315 ] 46 root - INFO - Entered the save_object method of MainUtils class
+[ 2026-06-10 00:42:00,315 ] 50 root - INFO - Exited the save_object method of MainUtils class
+[ 2026-06-10 00:42:00,323 ] 35 root - INFO - data Transformation completed
+[ 2026-06-10 00:42:00,323 ] 37 root - INFO - Model Training sstared
+[ 2026-06-10 00:45:15,040 ] 95 root - INFO - Best model: Random Forest with score: 0.9185955634397985
+[ 2026-06-10 00:45:25,558 ] 46 root - INFO - Entered the save_object method of MainUtils class
+[ 2026-06-10 00:45:25,558 ] 50 root - INFO - Exited the save_object method of MainUtils class
+[ 2026-06-10 00:45:25,558 ] 46 root - INFO - Entered the save_object method of MainUtils class
+[ 2026-06-10 00:45:25,569 ] 50 root - INFO - Exited the save_object method of MainUtils class
+[ 2026-06-10 00:45:25,569 ] 122 root - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts\\06_10_2026_00_41_53\\model_trainer\\trained_model\\model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9905034208107832, precision_score=0.9885854056257644, recall_score=0.9924288929813792), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.982690794649882, precision_score=0.9819182389937107, recall_score=0.9834645669291339))
+[ 2026-06-10 00:45:25,569 ] 42 root - INFO - Model Training artifact created
