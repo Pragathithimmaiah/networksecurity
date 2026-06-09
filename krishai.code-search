@@ -1,0 +1,9 @@
+# Query: krishai
+# ContextLines: 1
+
+1 result - 1 file
+
+networksecurity\constant\training_pipeline\__init__.py:
+  28  DATA_INGESTION_COLLECTION_NAME: str = "NetworkData"
+  29: DATA_INGESTION_DATABASE_NAME: str = "PRAGATHI"
+  30  DATA_INGESTION_DIR_NAME: str = "data_ingestion"
