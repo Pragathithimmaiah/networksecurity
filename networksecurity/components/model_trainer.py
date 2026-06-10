@@ -1,5 +1,6 @@
 import os
 import sys
+from urllib.parse import urlparse 
 
 from networksecurity.exception.exception import NetworkSecurityException 
 from networksecurity.logging.logger import logging
@@ -13,8 +14,6 @@ from networksecurity.utils.main_utils.utils import load_numpy_array_data, evalua
 from networksecurity.utils.ml_utils.metric.classification_metric import get_classification_score
 
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import r2_score
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import (
     AdaBoostClassifier,
@@ -22,10 +21,11 @@ from sklearn.ensemble import (
     RandomForestClassifier,
 )
 import mlflow
-from urllib.parse import urlparse
+import dagshub
 
-#  Local SQLite tracking — no DagsHub, no limits
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+dagshub.init(repo_owner='Pragathithimmaiah', repo_name='networksecurity', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/Pragathithimmaiah/networksecurity.mlflow")  # ADD THIS
+mlflow.set_experiment("NetworkSecurity")  # ADD THIS
 
 
 class ModelTrainer:
@@ -36,10 +36,9 @@ class ModelTrainer:
         except Exception as e:
             raise NetworkSecurityException(e, sys)
 
-    def track_mlflow(self, best_model, classificationmetric):
-        # Removed dagshub registry URI
+    def track_mlflow(self, best_model, classificationmetric, run_name="run"):  # CHANGED
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-        with mlflow.start_run():
+        with mlflow.start_run(run_name=run_name):  # CHANGED - added run_name
             f1_score = classificationmetric.f1_score
             precision_score = classificationmetric.precision_score
             recall_score = classificationmetric.recall_score
@@ -97,12 +96,12 @@ class ModelTrainer:
         # Train metrics
         y_train_pred = best_model.predict(X_train)
         classification_train_metric = get_classification_score(y_true=y_train, y_pred=y_train_pred)
-        self.track_mlflow(best_model, classification_train_metric)
+        self.track_mlflow(best_model, classification_train_metric, run_name="train")  # CHANGED
 
         # Test metrics
         y_test_pred = best_model.predict(x_test)
         classification_test_metric = get_classification_score(y_true=y_test, y_pred=y_test_pred)
-        self.track_mlflow(best_model, classification_test_metric)
+        self.track_mlflow(best_model, classification_test_metric, run_name="test")  # CHANGED
 
         # Save model
         preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
